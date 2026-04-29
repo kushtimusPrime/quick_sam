@@ -30,7 +30,7 @@ from PIL import Image
 from sam2.sam2_image_predictor import SAM2ImagePredictor
 
 SAM3D_PYTHON = "/home/eyeballisticmissile/miniforge3/envs/sam3d-objects/bin/python"
-SAM3D_LIFT_SCRIPT = "/home/eyeballisticmissile/sam-3d-objects/lift_3d.py"
+SAM3D_LIFT_SCRIPT = Path(__file__).parent / "lift_3d.py"
 
 
 def parse_args():
