@@ -9,7 +9,8 @@ dependencies = [
     "torchvision>=0.20.1",
     "sam2",
     "huggingface-hub",
-    "matplotlib",
+    "viser",
+    "trimesh",
     "numpy",
     "pillow",
 ]
