@@ -251,7 +251,7 @@ class SegmentationUI:
 
             cmd = [
                 SAM3D_PYTHON,
-                SAM3D_LIFT_SCRIPT,
+                str(SAM3D_LIFT_SCRIPT),
                 "--image", str(image_path),
                 "--mask", str(mask_path),
                 "--out", str(out_stem),
