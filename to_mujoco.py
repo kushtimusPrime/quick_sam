@@ -103,7 +103,7 @@ def main() -> None:
     mjcf_path = out_dir / f"{stem}.xml"
     mjcf = textwrap.dedent(f"""\
         <mujoco model="{stem}">
-          <compiler meshdir="{out_dir.name}/"/>
+          <compiler meshdir="."/>
 
           <asset>
             <!-- longest axis = {scale_m:.4f}m  (source: {scale_source}) -->

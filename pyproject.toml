@@ -13,4 +13,8 @@ dependencies = [
     "trimesh",
     "numpy",
     "pillow",
+    "mjviser",
 ]
+
+[tool.uv.sources]
+mjviser = { git = "https://github.com/mujocolab/mjviser" }
