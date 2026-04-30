@@ -79,22 +79,17 @@ Skip calibration (keep MoGe's depth estimate) by clicking **Skip**.
 
 ## MuJoCo export
 
-After lifting with **Mesh output** checked, convert to a MuJoCo-ready OBJ + MJCF template:
-
-```bash
-uv run python to_mujoco.py <stem>_3d.glb
-```
-
-If the JSON sidecar exists (it always will after a mesh lift), the scale is read automatically. Override with `--scale`:
-
-```bash
-uv run python to_mujoco.py photo_3d.glb --scale 0.22   # object is 22 cm on longest axis
-```
-
-Outputs (in `<stem>/` next to the GLB):
+When you click **Confirm & Exit** (or **Skip**) in scale calibration, `segment.py` automatically runs `to_mujoco.py` on the lifted GLB. Outputs land in `<stem>/` next to the GLB:
 
 - `<stem>.obj` — mesh normalised so longest axis = 1 unit
 - `<stem>.xml` — MJCF template with `scale=` set to the calibrated metric size
+
+To re-run manually (e.g. with an override scale):
+
+```bash
+uv run python to_mujoco.py <stem>_3d.glb               # uses sidecar JSON
+uv run python to_mujoco.py <stem>_3d.glb --scale 0.22  # 22 cm override
+```
 
 ```bash
 # Quick viewer check

@@ -17,6 +17,7 @@ import argparse
 import json
 import shutil
 import subprocess
+import sys
 import tempfile
 import time
 from pathlib import Path
@@ -31,6 +32,7 @@ from sam2.sam2_image_predictor import SAM2ImagePredictor
 
 SAM3D_PYTHON = "/home/eyeballisticmissile/miniforge3/envs/sam3d-objects/bin/python"
 SAM3D_LIFT_SCRIPT = Path(__file__).parent / "lift_3d.py"
+TO_MUJOCO_SCRIPT = Path(__file__).parent / "to_mujoco.py"
 
 
 def parse_args():
@@ -369,12 +371,22 @@ class SegmentationUI:
                     data["scale_correction_factor"] = real_m / moge_m
                 json_path.write_text(json.dumps(data, indent=2))
                 print(f"Corrected scale: {real_m:.4f} m → {json_path}")
+            self._run_to_mujoco(glb_path)
             self._done = True
 
         @skip_btn.on_click
         def _skip(_) -> None:
             print("Using MoGe estimate as-is.")
+            self._run_to_mujoco(glb_path)
             self._done = True
+
+    def _run_to_mujoco(self, glb_path: Path) -> None:
+        cmd = [sys.executable, str(TO_MUJOCO_SCRIPT), str(glb_path)]
+        print(f"Building MuJoCo assets...\n  $ {' '.join(cmd)}")
+        try:
+            subprocess.run(cmd, check=True)
+        except subprocess.CalledProcessError as e:
+            print(f"to_mujoco.py failed (exit {e.returncode}). Run it manually on {glb_path}.")
 
     def run(self) -> None:
         try:
