@@ -27,6 +27,7 @@ SAM3D_REPO = Path("/home/eyeballisticmissile/sam-3d-objects")
 os.environ["CONDA_PREFIX"] = str(Path(sys.executable).resolve().parent.parent)
 
 sys.path.insert(0, str(SAM3D_REPO / "notebook"))
+sys.path.insert(0, str(SAM3D_REPO))
 import numpy as np
 from PIL import Image
 from inference import Inference  # noqa: E402
